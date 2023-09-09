@@ -55,10 +55,10 @@ struct ContentView: View {
           .aspectRatio(1.0, contentMode: .fit)
           .overlay(
             Rectangle()
-              .strokeBorder(foregroundColor, lineWidth: 6)
-              .contrast(20.0)
+              .strokeBorder(foregroundColor, lineWidth: Constants.General.colorSplotchBorderWidth)
+              .contrast(Constants.General.colorSplotchBorderContrast)
           )
-          .padding(.horizontal, 10)
+          .padding(.horizontal, Constants.General.rectanglePadding)
       }
       Spacer()
       VStack {
@@ -77,21 +77,21 @@ struct ContentView: View {
         }) {
           Text("Set Color")
             .font(.headline)
-            .padding(20)
+            .padding(Constants.General.rectanglePadding)
             .background(
               Color("ButtonColor")
             )
             .foregroundColor(Color.white)
-            .cornerRadius(21.0)
+            .cornerRadius(Constants.General.cornerRadius)
             .overlay(
-              RoundedRectangle(cornerRadius: 21.0)
-                .strokeBorder(Color.white, lineWidth: 2)
+              RoundedRectangle(cornerRadius: Constants.General.cornerRadius)
+                .strokeBorder(Color.white, lineWidth: Constants.General.buttonBorderWidth)
             )
         }
       }
     }
     .background(Color("BackgroundColor"))
-    .padding(20)
+    .padding(Constants.General.rectanglePadding)
   }
 }
 

@@ -13,6 +13,7 @@
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
 		784FCA6F2AABF332005C187D /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784FCA6E2AABF332005C187D /* SliderView.swift */; };
+		784FCA732AAC9BF9005C187D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784FCA722AAC9BF9005C187D /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		784FCA6E2AABF332005C187D /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
+		784FCA722AAC9BF9005C187D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				1839F4AF25190F2A00BB00F1 /* AppMain.swift */,
+				784FCA722AAC9BF9005C187D /* Constants.swift */,
 				18D775C422AD944300AE281E /* ContentView.swift */,
 				784FCA6E2AABF332005C187D /* SliderView.swift */,
 				18D775C622AD944400AE281E /* Assets.xcassets */,
@@ -175,6 +178,7 @@
 				784FCA6F2AABF332005C187D /* SliderView.swift in Sources */,
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
+				784FCA732AAC9BF9005C187D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

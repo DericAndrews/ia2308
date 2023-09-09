@@ -30,45 +30,14 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct SliderView: View {
-  @Binding var color: Double
-  var colorName: String
-  
-  var body: some View {
-    VStack {
-      Text(colorName)
-        .font(.title3)
-      HStack {
-        Slider(value: $color, in: 0...255)
-          .tint(colorStringToColor(name:colorName.lowercased()))
-        Text("\(Int(color.rounded()))")
-          .font(.headline)
-      }
-    }
-  }
-}
-
-
-func colorStringToColor(name: String) -> Color {
-    switch name {
-    case "red":
-      return Color.red
-    case "green":
-      return Color.green
-    case "blue":
-      return Color.blue
-    default:
-      return Color.accentColor
-    }
-  }
-
-
-struct SliderView_Previews: PreviewProvider {
-  static var color = Binding.constant(20.0)
-  static var colorName = "Green"
-  static var previews: some View {
-    SliderView(color: color, colorName: colorName)
+enum Constants {
+  enum General {
+    public static let colorSplotchBorderWidth = CGFloat(6)
+    public static let colorSplotchBorderContrast = CGFloat(20)
+    public static let cornerRadius = CGFloat(21.0)
+    public static let buttonBorderWidth = CGFloat(2)
+    public static let rectanglePadding = CGFloat(20)
   }
 }
