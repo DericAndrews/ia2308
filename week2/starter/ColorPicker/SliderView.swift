@@ -42,7 +42,7 @@ struct SliderView: View {
         .font(.title3)
       HStack {
         Slider(value: $color, in: 0...255)
-          .tint(SliderView.colorConversion(name:colorName))
+          .tint(SliderView.colorStringToColor(name:colorName.lowercased()))
         Text("\(Int(color.rounded()))")
           .font(.headline)
       }
@@ -52,19 +52,20 @@ struct SliderView: View {
 
 
 extension SliderView {
-  static func colorConversion(name: String) -> Color {
+  static func colorStringToColor(name: String) -> Color {
     switch name {
-    case "Red":
+    case "red":
       return Color.red
-    case "Green":
+    case "green":
       return Color.green
-    case "Blue":
+    case "blue":
       return Color.blue
     default:
       return Color.accentColor
     }
   }
 }
+
 
 struct SliderView_Previews: PreviewProvider {
   static var color = Binding.constant(20.0)
