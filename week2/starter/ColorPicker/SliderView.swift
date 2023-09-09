@@ -1,15 +1,15 @@
 /// Copyright (c) 2023 Kodeco Inc.
-///
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -29,78 +29,47 @@
 /// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
-/// /////
 
 import SwiftUI
 
-struct ContentView: View {
-  @Environment(\.verticalSizeClass) var verticalSizeClass
-  
-  @State private var redColor: Double = 0.0
-  @State private var greenColor: Double = 0.0
-  @State private var blueColor: Double = 0.0
-  @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
+struct SliderView: View {
+  @Binding var color: Double
+  var colorName: String
   
   var body: some View {
-    let layout = verticalSizeClass == .regular ? AnyLayout(VStackLayout()) : AnyLayout(HStackLayout())
-    
-    layout {
-      VStack {
-        Text("Color Picker")
-          .font(.largeTitle)
-          .bold()
-        
-        Rectangle()
-          .foregroundColor(foregroundColor)
-          .aspectRatio(1.0, contentMode: .fit)
-          .overlay(
-            Rectangle()
-              .strokeBorder(foregroundColor, lineWidth: 6)
-              .contrast(20.0)
-          )
-          .padding(.horizontal, 10)
-      }
-      Spacer()
-      VStack {
-        
-        SliderView(color: $redColor, colorName: "Red")
-        SliderView(color: $greenColor, colorName: "Green")
-        SliderView(color: $blueColor, colorName: "Blue")
-        
-        Button(action: {
-          withAnimation {
-            foregroundColor = Color(
-              red: redColor / 255,
-              green: greenColor / 255,
-              blue: blueColor / 255)
-          }
-        }) {
-          Text("Set Color")
-            .font(.headline)
-            .padding(20)
-            .background(
-              Color("ButtonColor")
-            )
-            .foregroundColor(Color.white)
-            .cornerRadius(21.0)
-            .overlay(
-              RoundedRectangle(cornerRadius: 21.0)
-                .strokeBorder(Color.white, lineWidth: 2)
-            )
-        }
+    VStack {
+      Text(colorName)
+        .font(.title3)
+      HStack {
+        Slider(value: $color, in: 0...255)
+          .tint(SliderView.colorConversion(name:colorName))
+        Text("\(Int(color.rounded()))")
+          .font(.headline)
       }
     }
-    .background(Color("BackgroundColor"))
-    .padding(20)
   }
 }
 
 
-struct ContentView_Previews: PreviewProvider {
+extension SliderView {
+  static func colorConversion(name: String) -> Color {
+    switch name {
+    case "Red":
+      return Color.red
+    case "Green":
+      return Color.green
+    case "Blue":
+      return Color.blue
+    default:
+      return Color.accentColor
+    }
+  }
+}
+
+struct SliderView_Previews: PreviewProvider {
+  static var color = Binding.constant(20.0)
+  static var colorName = "Green"
   static var previews: some View {
-    ContentView()
-    ContentView()
-      .preferredColorScheme(.dark)
-      .previewInterfaceOrientation(.landscapeRight)
+    SliderView(color: color, colorName: colorName)
   }
 }
