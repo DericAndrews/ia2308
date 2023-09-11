@@ -82,11 +82,11 @@ struct ContentView: View {
             )
             .foregroundColor(Color("ButtonTextColor"))
             .cornerRadius(Constants.General.cornerRadius)
+            .modifier(ShadowModifier())
             .overlay(
               RoundedRectangle(cornerRadius: Constants.General.cornerRadius)
                 .strokeBorder(Color.white, lineWidth: Constants.General.buttonBorderWidth)
             )
-            .modifier(ShadowModifier())
         }
       }
     }

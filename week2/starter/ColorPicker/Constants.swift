@@ -41,8 +41,8 @@ enum Constants {
     public static let rectanglePadding = CGFloat(20)
   }
   enum Shadow {
-    public static let radius = CGFloat(5)
-    public static let xOffset = CGFloat(5)
-    public static let yOffset = CGFloat(5)
+    public static let radius = CGFloat(2.2)
+    public static let xOffset = CGFloat(3)
+    public static let yOffset = CGFloat(3)
   }
 }
