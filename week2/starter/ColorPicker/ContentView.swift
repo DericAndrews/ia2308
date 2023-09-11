@@ -62,7 +62,6 @@ struct ContentView: View {
       }
       Spacer()
       VStack {
-        
         SliderView(color: $redColor, colorName: "Red")
         SliderView(color: $greenColor, colorName: "Green")
         SliderView(color: $blueColor, colorName: "Blue")
@@ -81,17 +80,29 @@ struct ContentView: View {
             .background(
               Color("ButtonColor")
             )
-            .foregroundColor(Color.white)
+            .foregroundColor(Color("ButtonTextColor"))
             .cornerRadius(Constants.General.cornerRadius)
             .overlay(
               RoundedRectangle(cornerRadius: Constants.General.cornerRadius)
                 .strokeBorder(Color.white, lineWidth: Constants.General.buttonBorderWidth)
             )
+            .modifier(ShadowModifier())
         }
       }
     }
     .background(Color("BackgroundColor"))
     .padding(Constants.General.rectanglePadding)
+  }
+}
+
+
+struct ShadowModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .shadow(color: Color("ShadowColor"),
+              radius: Constants.Shadow.radius,
+              x: Constants.Shadow.xOffset,
+              y: Constants.Shadow.yOffset)
   }
 }
 

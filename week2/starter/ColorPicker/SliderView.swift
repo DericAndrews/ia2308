@@ -43,6 +43,7 @@ struct SliderView: View {
       HStack {
         Slider(value: $color, in: 0...255)
           .tint(colorStringToColor(name:colorName.lowercased()))
+          .modifier(ShadowModifier())
         Text("\(Int(color.rounded()))")
           .font(.headline)
       }
