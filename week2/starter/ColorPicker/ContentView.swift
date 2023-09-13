@@ -29,58 +29,89 @@
 /// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
+/// /////
 
 import SwiftUI
 
 struct ContentView: View {
-  @State private var alertIsVisible: Bool = false
+  @Environment(\.verticalSizeClass) var verticalSizeClass
+  
   @State private var redColor: Double = 0.0
   @State private var greenColor: Double = 0.0
   @State private var blueColor: Double = 0.0
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
-
+  
   var body: some View {
-
-    VStack {
-      Text("Color Picker")
-        .font(.largeTitle)
-
-      RoundedRectangle(cornerRadius: 0)
-        .foregroundColor(foregroundColor)
-        .border(.black)
+    let layout = verticalSizeClass == .regular ? AnyLayout(VStackLayout()) : AnyLayout(HStackLayout())
+    
+    layout {
       VStack {
-        Text("Red")
-        HStack {
-          Slider(value: $redColor, in: 0...255)
-          Text("\(Int(redColor.rounded()))")
-        }
+        Text("Color Picker")
+          .font(.largeTitle)
+          .bold()
+        
+        Rectangle()
+          .foregroundColor(foregroundColor)
+          .aspectRatio(1.0, contentMode: .fit)
+          .overlay(
+            Rectangle()
+              .strokeBorder(foregroundColor, lineWidth: Constants.General.colorSplotchBorderWidth)
+              .contrast(Constants.General.colorSplotchBorderContrast)
+          )
+          .padding(.horizontal, Constants.General.rectanglePadding)
       }
+      Spacer()
       VStack {
-        Text("Green")
-        HStack {
-          Slider(value: $greenColor, in: 0...255)
-          Text("\(Int(greenColor.rounded()))")
+        SliderView(color: $redColor, colorName: "Red")
+        SliderView(color: $greenColor, colorName: "Green")
+        SliderView(color: $blueColor, colorName: "Blue")
+        
+        Button(action: {
+          withAnimation {
+            foregroundColor = Color(
+              red: redColor / 255,
+              green: greenColor / 255,
+              blue: blueColor / 255)
+          }
+        }) {
+          Text("Set Color")
+            .font(.headline)
+            .padding(Constants.General.rectanglePadding)
+            .background(
+              Color("ButtonColor")
+            )
+            .foregroundColor(Color("ButtonTextColor"))
+            .cornerRadius(Constants.General.cornerRadius)
+            .modifier(ShadowModifier())
+            .overlay(
+              RoundedRectangle(cornerRadius: Constants.General.cornerRadius)
+                .strokeBorder(Color.white, lineWidth: Constants.General.buttonBorderWidth)
+            )
         }
-      }
-      VStack {
-        Text("Blue")
-        HStack {
-          Slider(value: $blueColor, in: 0...255)
-          Text("\(Int(blueColor.rounded()))")
-        }
-      }
-      Button("Set Color") {
-        foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
       }
     }
-    .background(Color.white)
-    .padding(20)
-
+    .background(Color("BackgroundColor"))
+    .padding(Constants.General.rectanglePadding)
   }
 }
+
+
+struct ShadowModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .shadow(color: Color("ShadowColor"),
+              radius: Constants.Shadow.radius,
+              x: Constants.Shadow.xOffset,
+              y: Constants.Shadow.yOffset)
+  }
+}
+
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
+    ContentView()
+      .preferredColorScheme(.dark)
+      .previewInterfaceOrientation(.landscapeRight)
   }
 }
